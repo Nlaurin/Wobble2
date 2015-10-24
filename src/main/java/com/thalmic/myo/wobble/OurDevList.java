@@ -43,28 +43,19 @@ public class OurDevList extends AbstractDeviceListener {
 
 
 
-        if(fist&&!synth.isPlaying()){
-            int pitchnew = (int)getPitchW(); //use getPitchW for padding reasons
-            synth.stopContinuous();
-            System.out.println(pitchnew + "we changed the pitch!");
-            synth.setPitch(pitchnew);
-            synth.startContinuous();
-        }
-        else{
-            synth.stopContinuous();
-        }
+
     }
 
     @Override
     public void onPose(Myo myo, long timestamp, Pose pose) {
         currentPose = pose;
-        if(currentPose.getType() == PoseType.FIST){
-            fist = true;
-        }
-        else{
-            fist = false;
-        }
-//        if (currentPose.getType() == PoseType.FIST) {
+//        if(currentPose.getType() == PoseType.FIST){
+//            fist = true;
+//        }
+//        else{
+//            fist = false;
+//        }
+////        if (currentPose.getType() == PoseType.FIST) {
 //            myo.vibrate(VibrationType.VIBRATION_MEDIUM);
 //        }
     }

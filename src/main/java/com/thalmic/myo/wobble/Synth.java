@@ -132,6 +132,9 @@ public class Synth {
     public void setInstrument(int instrument){
         this.instrument = instrument;
     }
+    public void setNotesIndex(int newIndex){
+        notesIndex = newIndex;
+    }
 }
 
 
