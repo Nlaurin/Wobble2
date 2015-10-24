@@ -3,6 +3,8 @@ package com.thalmic.myo.wobble;
 import com.thalmic.myo.DeviceListener;
 import com.thalmic.myo.Hub;
 import com.thalmic.myo.Myo;
+import com.thalmic.myo.Pose;
+import com.thalmic.myo.enums.PoseType;
 import com.thalmic.myo.example.DataCollector;
 
 /**
@@ -28,16 +30,23 @@ public class CtrlCntr {
 
             int pitch = 0;
             int lastPitch = 0;
+            Pose pose;
             synth.startContinuous();
-            while (true) {
+            Boolean exit = false;
+            while (!exit) {
                 hub.run(5);
                 lastPitch = pitch;
                 pitch = (int)dataCollector.getPitchW();
-                if(pitch != lastPitch) { //only call change of note if we changed pitch
-                    synth.stopContinuous();
-                    System.out.println(pitch + "we changed the pitch!");
-                    synth.setPitch(pitch);
-                    synth.startContinuous();
+                pose = dataCollector.getCurrentPose();
+                System.out.println(dataCollector.getCurrentPose());
+                if(pose.getType() == PoseType.FIST) { //only call change of note if we changed pitch
+                    System.out.println(dataCollector.getCurrentPose());
+                    if(pitch != lastPitch) {
+                        synth.stopContinuous();
+                        System.out.println(pitch + "we changed the pitch!");
+                        synth.setPitch(pitch);
+                        synth.startContinuous();
+                    }
                 }
             }
         } catch (Exception e) {
