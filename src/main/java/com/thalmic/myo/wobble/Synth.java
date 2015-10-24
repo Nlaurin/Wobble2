@@ -7,7 +7,7 @@ import javax.sound.midi.*;
  */
 public class Synth {
 
-    private int pitch, volume, octave;
+    private int pitch, volume, octave, instrument;
     private final int notesSize = 8;
     private boolean isPlaying;
     private Synthesizer music;
@@ -19,6 +19,7 @@ public class Synth {
         pitch = 40;
         isPlaying = false;
         volume = 100;
+        instrument = 90;
         try {
             music = MidiSystem.getSynthesizer();
             music.open();
@@ -32,7 +33,7 @@ public class Synth {
         try{
             MidiChannel[] channels = music.getChannels();
             //channels[11].programChange(90);
-            channels[10].programChange(89);
+            channels[10].programChange(instrument);
             //channels[11].noteOn(pitch, volume);
             channels[10].noteOn(pitch, volume);
 //            if(isPlaying) {
@@ -117,6 +118,9 @@ public class Synth {
 
     public void closeChannel(){
 
+    }
+    public void setInstrument(int instrument){
+        this.instrument = instrument;
     }
 }
 
