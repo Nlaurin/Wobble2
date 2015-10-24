@@ -4,6 +4,7 @@ import com.thalmic.myo.DeviceListener;
 import com.thalmic.myo.Hub;
 import com.thalmic.myo.Myo;
 import com.thalmic.myo.Pose;
+import com.thalmic.myo.enums.LockingPolicy;
 import com.thalmic.myo.enums.PoseType;
 import com.thalmic.myo.example.DataCollector;
 
@@ -16,6 +17,7 @@ public class CtrlCntr {
         Synth synth = new Synth();
         try {
             Hub hub = new Hub("com.wobble.ctrlcntr");
+            hub.setLockingPolicy(LockingPolicy.LOCKING_POLICY_NONE);
 
             System.out.println("Attempting to find a Myo...");
             Myo myo = hub.waitForMyo(10000);
@@ -35,18 +37,20 @@ public class CtrlCntr {
             Boolean exit = false;
             while (!exit) {
                 hub.run(5);
-                lastPitch = pitch;
-                pitch = (int)dataCollector.getPitchW();
                 pose = dataCollector.getCurrentPose();
-                System.out.println(dataCollector.getCurrentPose());
                 if(pose.getType() == PoseType.FIST) { //only call change of note if we changed pitch
-                    System.out.println(dataCollector.getCurrentPose());
+                    //System.out.println(dataCollector.getCurrentPose());
+                    lastPitch = pitch;
+                    pitch = (int)dataCollector.getPitchW();
                     if(pitch != lastPitch) {
                         synth.stopContinuous();
                         System.out.println(pitch + "we changed the pitch!");
                         synth.setPitch(pitch);
                         synth.startContinuous();
                     }
+                }else {
+                    synth.stopContinuous();
+                    pitch = -1;
                 }
             }
         } catch (Exception e) {

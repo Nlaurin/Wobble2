@@ -10,7 +10,7 @@ import com.thalmic.myo.enums.*;
  * Created by alexkarle on 10/24/15.
  */
 public class OurDevList extends AbstractDeviceListener {
-    private static final int SCALE = 17; //number of subdivisions of range of position output
+    private static final int SCALE = 8; //number of subdivisions of range of position output
     private double rollW;
     private double pitchW;
     private double yawW;
@@ -41,9 +41,9 @@ public class OurDevList extends AbstractDeviceListener {
     @Override
     public void onPose(Myo myo, long timestamp, Pose pose) {
         currentPose = pose;
-        if (currentPose.getType() == PoseType.FIST) {
-            myo.vibrate(VibrationType.VIBRATION_MEDIUM);
-        }
+//        if (currentPose.getType() == PoseType.FIST) {
+//            myo.vibrate(VibrationType.VIBRATION_MEDIUM);
+//        }
     }
 
     @Override
