@@ -28,16 +28,16 @@ public class CtrlCntr {
 
             int pitch = 0;
             int lastPitch = 0;
-            synth.startBeat();
+            synth.startContinuous();
             while (true) {
                 hub.run(5);
                 lastPitch = pitch;
                 pitch = (int)dataCollector.getPitchW();
                 if(pitch != lastPitch) { //only call change of note if we changed pitch
-                    synth.stopBeat();
+                    synth.stopContinuous();
                     System.out.println(pitch + "we changed the pitch!");
                     synth.setPitch(10 + (5 * pitch));
-                    synth.startBeat();
+                    synth.startContinuous();
                 }
             }
         } catch (Exception e) {

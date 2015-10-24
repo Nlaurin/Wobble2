@@ -24,7 +24,7 @@ public class Synth {
         }
     }
 
-    public Synthesizer startBeat(){
+    public Synthesizer startContinuous(){
             isPlaying = true;
         try{
             MidiChannel[] channels = music.getChannels();
@@ -46,7 +46,7 @@ public class Synth {
         }
     }
 
-    public Synthesizer stopBeat(){
+    public Synthesizer stopContinuous(){
         try{
             MidiChannel[] channels = music.getChannels();
             channels[10].noteOff(pitch, volume);
