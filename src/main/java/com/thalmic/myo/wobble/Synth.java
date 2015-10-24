@@ -8,13 +8,14 @@ import javax.sound.midi.*;
 public class Synth {
 
     private int pitch, volume, octave;
-    private final int notesSize = 18;
+    private final int notesSize = 8;
     private boolean isPlaying;
     private Synthesizer music;
     private final int[] notes;
 
     public Synth(){
-        notes = new int[]{57, 59, 60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83, 84, 86};
+        octave = 0;
+        notes = new int[]{60, 62, 64, 65, 67, 69, 71, 72};
         pitch = 40;
         isPlaying = false;
         volume = 100;
@@ -26,7 +27,6 @@ public class Synth {
             e.printStackTrace();
         }
     }
-
     public Synthesizer startContinuous(){
         isPlaying = true;
         try{
@@ -92,6 +92,7 @@ public class Synth {
     public void resetOctave() {
         octave = 0;
     }
+    
     public int getPitch(){ return pitch; }
 
     public void addPitch(int pitch){
