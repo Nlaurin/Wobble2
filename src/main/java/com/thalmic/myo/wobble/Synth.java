@@ -1,5 +1,7 @@
 package com.thalmic.myo.wobble;
 
+
+
 import javax.sound.midi.*;
 
 /**
@@ -7,7 +9,7 @@ import javax.sound.midi.*;
  */
 public class Synth {
 
-    private int pitch, volume, octave, instrument;
+    private int pitch, volume, octave, instrument, notesIndex;
     private final int notesSize = 8;
     private boolean isPlaying;
     private Synthesizer music;
@@ -20,6 +22,7 @@ public class Synth {
         isPlaying = false;
         volume = 100;
         instrument = 90;
+        notesIndex = 0;
         try {
             music = MidiSystem.getSynthesizer();
             music.open();
@@ -57,7 +60,7 @@ public class Synth {
             channels[10].programChange(instrument);
             channels[10].noteOn(pitch, volume);
             delay(length);
-            channels[10].noteOff(pitch,volume);
+            channels[10].noteOff(pitch, volume);
             return music;
         }
         catch (Exception e) {
@@ -88,7 +91,16 @@ public class Synth {
     }
 
     public void setPitch(int val){
+        notesIndex = val;
         this.pitch = notes[val] + 12*octave;
+    }
+
+    public int getNotesIndex(){
+        return notesIndex;
+    }
+
+    public boolean isPlaying(){
+        return isPlaying;
     }
 
     public void increaseOctave() {
