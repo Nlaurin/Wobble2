@@ -32,7 +32,7 @@ public class Synth {
         try{
             MidiChannel[] channels = music.getChannels();
             //channels[11].programChange(90);
-            channels[10].programChange(37);
+            channels[10].programChange(89);
             //channels[11].noteOn(pitch, volume);
             channels[10].noteOn(pitch, volume);
 //            if(isPlaying) {

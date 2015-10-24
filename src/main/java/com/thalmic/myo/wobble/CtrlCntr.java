@@ -36,7 +36,7 @@ public class CtrlCntr {
                 if(pitch != lastPitch) { //only call change of note if we changed pitch
                     synth.stopContinuous();
                     System.out.println(pitch + "we changed the pitch!");
-                    synth.setPitch(10 + (5 * pitch));
+                    synth.setPitch(pitch);
                     synth.startContinuous();
                 }
             }
