@@ -37,21 +37,21 @@ public class CtrlCntr {
             Boolean exit = false;
             while (!exit) {
                 hub.run(10);
-                pose = dataCollector.getCurrentPose();
-                if(pose.getType() == PoseType.FIST) { //only call change of note if we changed pitch
-                    //System.out.println(dataCollector.getCurrentPose());
-                    lastPitch = pitch;
-                    pitch = (int)dataCollector.getPitchW();
-                    if(pitch != lastPitch) {
-                        synth.stopContinuous();
-                        System.out.println(pitch + "we changed the pitch!");
-                        synth.setPitch(pitch);
-                        synth.startContinuous();
-                    }
-                }else {
-                    synth.stopContinuous();
-                    pitch = -1;
-                }
+//                pose = dataCollector.getCurrentPose();
+//                if(pose.getType() == PoseType.FIST) { //only call change of note if we changed pitch
+//                    //System.out.println(dataCollector.getCurrentPose());
+//                    lastPitch = pitch;
+//                    pitch = (int)dataCollector.getPitchW();
+//                    if(pitch != lastPitch) {
+//                        synth.stopContinuous();
+//                        System.out.println(pitch + "we changed the pitch!");
+//                        synth.setPitch(pitch);
+//                        synth.startContinuous();
+//                    }
+//                }else {
+//                    synth.stopContinuous();
+//                    pitch = -1;
+//                }
             }
         } catch (Exception e) {
             System.err.println("Error: ");

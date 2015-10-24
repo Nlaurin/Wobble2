@@ -16,10 +16,12 @@ public class OurDevList extends AbstractDeviceListener {
     private double yawW;
     private Pose currentPose;
     private Arm whichArm;
+    private Synth synth;
 
 
     public OurDevList() {
         rollW = 0;
+        synth = new Synth();
         pitchW = 0;
         yawW = 0;
         currentPose = new Pose();
@@ -41,57 +43,67 @@ public class OurDevList extends AbstractDeviceListener {
     @Override
     public void onPose(Myo myo, long timestamp, Pose pose) {
         currentPose = pose;
+        if(currentPose.getType() == PoseType.FIST){
+            int pitch = (int)getPitchW(); //use getPitchW for padding reasons
+            synth.stopContinuous();
+            System.out.println(pitch + "we changed the pitch!");
+            synth.setPitch(pitch);
+            synth.startContinuous();
+        }
+        else{
+            synth.stopContinuous();
+        }
 //        if (currentPose.getType() == PoseType.FIST) {
 //            myo.vibrate(VibrationType.VIBRATION_MEDIUM);
 //        }
     }
 
-    @Override
-    public void onArmSync(Myo myo, long timestamp, Arm arm, XDirection xDirection, float rotation, WarmupState warmupState) {
-        whichArm = arm;
-    }
+//    @Override
+//    public void onArmSync(Myo myo, long timestamp, Arm arm, XDirection xDirection, float rotation, WarmupState warmupState) {
+//        whichArm = arm;
+//    }
+//
+//    @Override
+//    public void onArmUnsync(Myo myo, long timestamp) {
+//        whichArm = null;
+//    }
 
-    @Override
-    public void onArmUnsync(Myo myo, long timestamp) {
-        whichArm = null;
-    }
+//    @Override
+//    public String toString() {
+////        StringBuilder builder = new StringBuilder("\r");
+////
+////        String xDisplay = String.format("[%s%s]", repeatCharacter('*', (int) rollW), repeatCharacter(' ', (int) (SCALE - rollW)));
+////        String yDisplay = String.format("[%s%s]", repeatCharacter('*', (int) pitchW), repeatCharacter(' ', (int) (SCALE - pitchW)));
+////        String zDisplay = String.format("[%s%s]", repeatCharacter('*', (int) yawW), repeatCharacter(' ', (int) (SCALE - yawW)));
+////
+////        String armString = null;
+////        if (whichArm != null) {
+////            armString = String.format("[%s]", whichArm == Arm.ARM_LEFT ? "L" : "R");
+////        } else {
+////            armString = String.format("[?]");
+////        }
+////        String poseString = null;
+////        if (currentPose != null) {
+////            String poseTypeString = currentPose.getType().toString();
+////            poseString = String.format("[%s%" + (SCALE - poseTypeString.length()) + "s]", poseTypeString, " ");
+////        } else {
+////            poseString = String.format("[%14s]", " ");
+////        }
+////        builder.append(xDisplay);
+////        builder.append(yDisplay);
+////        builder.append(zDisplay);
+////        builder.append(armString);
+////        builder.append(poseString);
+//        return "hey";//builder.toString();
+//    }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder("\r");
-
-        String xDisplay = String.format("[%s%s]", repeatCharacter('*', (int) rollW), repeatCharacter(' ', (int) (SCALE - rollW)));
-        String yDisplay = String.format("[%s%s]", repeatCharacter('*', (int) pitchW), repeatCharacter(' ', (int) (SCALE - pitchW)));
-        String zDisplay = String.format("[%s%s]", repeatCharacter('*', (int) yawW), repeatCharacter(' ', (int) (SCALE - yawW)));
-
-        String armString = null;
-        if (whichArm != null) {
-            armString = String.format("[%s]", whichArm == Arm.ARM_LEFT ? "L" : "R");
-        } else {
-            armString = String.format("[?]");
-        }
-        String poseString = null;
-        if (currentPose != null) {
-            String poseTypeString = currentPose.getType().toString();
-            poseString = String.format("[%s%" + (SCALE - poseTypeString.length()) + "s]", poseTypeString, " ");
-        } else {
-            poseString = String.format("[%14s]", " ");
-        }
-        builder.append(xDisplay);
-        builder.append(yDisplay);
-        builder.append(zDisplay);
-        builder.append(armString);
-        builder.append(poseString);
-        return "hey";//builder.toString();
-    }
-
-    private String repeatCharacter(char character, int numOfTimes) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < numOfTimes; i++) {
-            builder.append(character);
-        }
-        return builder.toString();
-    }
+//    private String repeatCharacter(char character, int numOfTimes) {
+//        StringBuilder builder = new StringBuilder();
+//        for (int i = 0; i < numOfTimes; i++) {
+//            builder.append(character);
+//        }
+//        return builder.toString();
+//    }
 
     public double getPitchW(){//returns 0-7
         if (pitchW<=4)return 0;

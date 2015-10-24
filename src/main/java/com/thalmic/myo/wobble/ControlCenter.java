@@ -14,6 +14,7 @@ public class ControlCenter extends JPanel {
     private final char[] notes = {'C', 'D', 'E', 'F', 'G', 'A', 'B', 'C'};
     public ControlCenter(){
         synth = new Synth();
+
     }
     public void paint(Graphics g){
         Graphics2D g2 = (Graphics2D)g;
