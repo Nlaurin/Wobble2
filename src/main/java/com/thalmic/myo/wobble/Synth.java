@@ -7,13 +7,14 @@ import javax.sound.midi.*;
  */
 public class Synth {
 
-    private int pitch, volume, octave, instrument;
+    private int pitch, volume, octave, instrument, playing;
     private final int notesSize = 8;
     private boolean isPlaying;
     private Synthesizer music;
     private final int[] notes;
 
     public Synth(){
+        playing = 0;
         octave = 0;
         notes = new int[]{60, 62, 64, 65, 67, 69, 71, 72};
         pitch = 40;
@@ -29,6 +30,7 @@ public class Synth {
         }
     }
     public Synthesizer startContinuous(){
+        playing = 1;
         isPlaying = true;
         try{
             MidiChannel[] channels = music.getChannels();
@@ -67,6 +69,7 @@ public class Synth {
     }
 
     public Synthesizer stopContinuous(){
+        playing = 0;
         try{
             MidiChannel[] channels = music.getChannels();
             channels[10].noteOff(pitch, volume);
@@ -103,7 +106,7 @@ public class Synth {
         octave = 0;
     }
 
-    public int getPitch(){ return pitch; }
+    public int getPitch(){ return pitch * playing; }
 
     public void addPitch(int pitch){
         this.pitch += pitch;
