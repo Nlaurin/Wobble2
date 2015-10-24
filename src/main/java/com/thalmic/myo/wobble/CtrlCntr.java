@@ -30,13 +30,13 @@ public class CtrlCntr {
             OurDevList dataCollector = new OurDevList();
             hub.addListener(dataCollector);
 
-            int pitch = 0;
-            int lastPitch = 0;
+            int pitch = -1;
+            int lastPitch;
             Pose pose;
             synth.startContinuous();
             Boolean exit = false;
             while (!exit) {
-                hub.run(5);
+                hub.run(10);
                 pose = dataCollector.getCurrentPose();
                 if(pose.getType() == PoseType.FIST) { //only call change of note if we changed pitch
                     //System.out.println(dataCollector.getCurrentPose());
