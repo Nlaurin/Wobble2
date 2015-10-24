@@ -8,10 +8,13 @@ import javax.sound.midi.*;
 public class Synth {
 
     private int pitch, volume;
+    private final int notesSize = 18;
     private boolean isPlaying;
     private Synthesizer music;
+    private final int[] notes;
 
     public Synth(){
+        notes = new int[]{57, 59, 60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83, 84, 86};
         pitch = 40;
         isPlaying = false;
         volume = 100;
@@ -25,7 +28,7 @@ public class Synth {
     }
 
     public Synthesizer startContinuous(){
-            isPlaying = true;
+        isPlaying = true;
         try{
             MidiChannel[] channels = music.getChannels();
             //channels[11].programChange(90);
@@ -66,17 +69,19 @@ public class Synth {
             e.printStackTrace();
         }
     }
-    public void setPitch(int pitch){
-        this.pitch = pitch;
+    public void setPitch(int index){
+        this.pitch = notes[index];
     }
 
     public int getPitch(){ return pitch; }
 
     public void addPitch(int pitch){
-    this.pitch += pitch;
-}
+        this.pitch += pitch;
+    }
 
     public void closeChannel(){
 
     }
 }
+
+
