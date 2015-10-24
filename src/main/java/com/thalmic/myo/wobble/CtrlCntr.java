@@ -11,6 +11,7 @@ import com.thalmic.myo.example.DataCollector;
 public class CtrlCntr {
 
     public static void main(String[] args) {
+        Synth synth = new Synth();
         try {
             Hub hub = new Hub("com.wobble.ctrlcntr");
 
@@ -27,12 +28,17 @@ public class CtrlCntr {
 
             int pitch = 0;
             int lastPitch = 0;
+            synth.startBeat();
             while (true) {
-                hub.run(200);
+                hub.run(5);
                 lastPitch = pitch;
                 pitch = (int)dataCollector.getPitchW();
-                if(pitch != lastPitch) //only call change of note if we changed pitch
+                if(pitch != lastPitch) { //only call change of note if we changed pitch
+                    synth.stopBeat();
                     System.out.println(pitch + "we changed the pitch!");
+                    synth.setPitch(10 + (5 * pitch));
+                    synth.startBeat();
+                }
             }
         } catch (Exception e) {
             System.err.println("Error: ");
