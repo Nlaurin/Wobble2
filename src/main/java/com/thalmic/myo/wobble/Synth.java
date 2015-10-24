@@ -87,15 +87,8 @@ public class Synth {
         }
     }
 
-    //Will get a value of 0 - 18, needs to convert to 0-7
     public void setPitch(int val){
-        int index;
-        if(val < 2)
-            index = 0;
-        else if(val > 16)
-            index = 7;
-        else index = (val/2)-1;
-        this.pitch = notes[index] + 12*octave;
+        this.pitch = notes[val] + 12*octave;
     }
 
     public void increaseOctave() {
@@ -116,8 +109,12 @@ public class Synth {
         this.pitch += pitch;
     }
 
-    public void closeChannel(){
+    public void setVolume(int vol){
+        volume = vol;
+    }
 
+    public int getVolume(int vold){
+        return volume;
     }
     public void setInstrument(int instrument){
         this.instrument = instrument;
