@@ -7,7 +7,7 @@ import javax.sound.midi.*;
  */
 public class Synth {
 
-    private int pitch, volume;
+    private int pitch, volume, octave;
     private final int notesSize = 18;
     private boolean isPlaying;
     private Synthesizer music;
@@ -69,10 +69,29 @@ public class Synth {
             e.printStackTrace();
         }
     }
-    public void setPitch(int index){
-        this.pitch = notes[index];
+
+    //Will get a value of 0 - 18, needs to convert to 0-7
+    public void setPitch(int val){
+        int index;
+        if(val < 2)
+            index = 0;
+        else if(val > 16)
+            index = 7;
+        else index = (val/2)-1;
+        this.pitch = notes[index] + 12*octave;
     }
 
+    public void increaseOctave() {
+        octave++;
+    }
+
+    public void decreaseOctave() {
+        octave--;
+    }
+
+    public void resetOctave() {
+        octave = 0;
+    }
     public int getPitch(){ return pitch; }
 
     public void addPitch(int pitch){
