@@ -49,6 +49,22 @@ public class Synth {
         }
     }
 
+    public Synthesizer playNote(int length){
+        isPlaying = true;
+        try{
+            MidiChannel[] channels = music.getChannels();
+            channels[10].programChange(89);
+            channels[10].noteOn(pitch, volume);
+            delay(length);
+            channels[10].noteOff(pitch,volume);
+            return music;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public Synthesizer stopContinuous(){
         try{
             MidiChannel[] channels = music.getChannels();
@@ -92,7 +108,7 @@ public class Synth {
     public void resetOctave() {
         octave = 0;
     }
-    
+
     public int getPitch(){ return pitch; }
 
     public void addPitch(int pitch){
