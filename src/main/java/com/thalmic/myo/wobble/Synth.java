@@ -54,7 +54,7 @@ public class Synth {
         isPlaying = true;
         try{
             MidiChannel[] channels = music.getChannels();
-            channels[10].programChange(89);
+            channels[10].programChange(instrument);
             channels[10].noteOn(pitch, volume);
             delay(length);
             channels[10].noteOff(pitch,volume);
