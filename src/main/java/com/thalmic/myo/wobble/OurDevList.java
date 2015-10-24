@@ -17,10 +17,12 @@ public class OurDevList extends AbstractDeviceListener {
     private Pose currentPose;
     private Arm whichArm;
     private Synth synth;
+    private boolean fist;
 
 
     public OurDevList() {
         rollW = 0;
+        fist = false;
         synth = new Synth();
         pitchW = 0;
         yawW = 0;
@@ -38,20 +40,29 @@ public class OurDevList extends AbstractDeviceListener {
         rollW = ((roll + Math.PI) / (Math.PI * 2.0) * SCALE);
         pitchW = ((pitch + Math.PI / 2.0) / Math.PI * SCALE);
         yawW = ((yaw + Math.PI) / (Math.PI * 2.0) * SCALE);
+
+
+
+        if(fist){
+            int pitchnew = (int)getPitchW(); //use getPitchW for padding reasons
+            synth.stopContinuous();
+            System.out.println(pitchnew + "we changed the pitch!");
+            synth.setPitch(pitchnew);
+            synth.startContinuous();
+        }
+        else{
+            synth.stopContinuous();
+        }
     }
 
     @Override
     public void onPose(Myo myo, long timestamp, Pose pose) {
         currentPose = pose;
         if(currentPose.getType() == PoseType.FIST){
-            int pitch = (int)getPitchW(); //use getPitchW for padding reasons
-            synth.stopContinuous();
-            System.out.println(pitch + "we changed the pitch!");
-            synth.setPitch(pitch);
-            synth.startContinuous();
+            fist = true;
         }
         else{
-            synth.stopContinuous();
+            fist = false;
         }
 //        if (currentPose.getType() == PoseType.FIST) {
 //            myo.vibrate(VibrationType.VIBRATION_MEDIUM);
