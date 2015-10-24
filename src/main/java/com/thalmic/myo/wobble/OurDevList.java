@@ -43,7 +43,7 @@ public class OurDevList extends AbstractDeviceListener {
 
 
 
-        if(fist){
+        if(fist&&!synth.isPlaying()){
             int pitchnew = (int)getPitchW(); //use getPitchW for padding reasons
             synth.stopContinuous();
             System.out.println(pitchnew + "we changed the pitch!");

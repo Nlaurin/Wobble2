@@ -70,6 +70,7 @@ public class Synth {
     }
 
     public Synthesizer stopContinuous(){
+        isPlaying = false;
         try{
             MidiChannel[] channels = music.getChannels();
             channels[10].noteOff(pitch, volume);
