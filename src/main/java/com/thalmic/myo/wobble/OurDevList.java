@@ -94,4 +94,5 @@ public class OurDevList extends AbstractDeviceListener {
     }
 
     public double getPitchW(){return pitchW;}
+    public Pose getCurrentPose(){return currentPose;}
 }
