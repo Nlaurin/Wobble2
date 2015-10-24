@@ -10,7 +10,7 @@ import com.thalmic.myo.enums.*;
  * Created by alexkarle on 10/24/15.
  */
 public class OurDevList extends AbstractDeviceListener {
-    private static final int SCALE = 18; //number of subdivisions of range of position output
+    private static final int SCALE = 17; //number of subdivisions of range of position output
     private double rollW;
     private double pitchW;
     private double yawW;
