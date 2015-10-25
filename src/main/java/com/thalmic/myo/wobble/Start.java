@@ -86,15 +86,16 @@ public class Start {
   rcvr.send(myMsg, timeStamp);
              */
 
-        Synth synth = new Synth();
-        ControlCenter control = new ControlCenter(synth);
+        //Synth synth = new Synth();
+        MidiMessenger messenger = new MidiMessenger();
+        ControlCenter control = new ControlCenter(messenger);
         JFrame fr = new JFrame();
         fr.setExtendedState(Frame.MAXIMIZED_BOTH);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fr.add(control);
         fr.pack();
         fr.setVisible(true);
-        synth.setInstrument(75); //Set instrument
+        //synth.setInstrument(75); //Set instrument
         try {
             Hub hub = new Hub("com.wobble.ctrlcntr");
             hub.setLockingPolicy(LockingPolicy.LOCKING_POLICY_NONE);
@@ -114,26 +115,32 @@ public class Start {
             int lastPitch;
             int updatePitch = 0;
             Pose pose;
-            synth.startContinuous();
+            //synth.startContinuous();
+            receiver.send(messenger.sendNoteOn(), -1);
             Boolean exit = false;
             while (!exit) {
                 hub.run(50);
                 pose = dataCollector.getCurrentPose();
                 updatePitch = (int)dataCollector.getPitchW();
-                synth.setNotesIndex(updatePitch);
+                //synth.setNotesIndex(updatePitch);
+                messenger.setNotesIndex(updatePitch);
                 if(pose.getType() == PoseType.FIST) { //only call change of note if we changed pitch
                     //System.out.println(dataCollector.getCurrentPose());
                     lastPitch = pitch;
                     pitch = (int)dataCollector.getPitchW();
                     if(pitch != lastPitch) {
-                        synth.stopContinuous();
+                        //synth.stopContinuous();
+                        receiver.send(messenger.sendNoteOff(), -1);
                         System.out.println(pitch + " We changed the pitch!");
-                        synth.setPitch(pitch);
-                        synth.startContinuous();
+                        //synth.setPitch(pitch);
+                        messenger.setPitch(pitch);
+                        //synth.startContinuous();
+                        receiver.send(messenger.sendNoteOn(), -1);
                     }
                 }
                 else {
-                    synth.stopContinuous();
+                    //synth.stopContinuous();
+                    receiver.send(messenger.sendNoteOff(), -1);
                     pitch = -1;
                 }
                 control.repaint();
