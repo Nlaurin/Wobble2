@@ -53,29 +53,29 @@ public class Start {
             }
         }
 
-        ShortMessage myMsg = new ShortMessage();
-        for(int i = 0; i < 100; i++) {
-            if (receiver != null) {
-                try {
-                    myMsg.setMessage(ShortMessage.NOTE_ON, 0, i, 93);
-                    receiver.send(myMsg, -1);
-                } catch (InvalidMidiDataException e) {
-                    e.printStackTrace();
-                }
-            }
-            try{
-                Thread.sleep(200);
-                try {
-                    myMsg.setMessage(ShortMessage.NOTE_OFF, 0, i, 93);
-                    receiver.send(myMsg, -1);
-                }catch (InvalidMidiDataException e){
-                    e.printStackTrace();
-                }
-            }
-            catch (InterruptedException e){
-                e.printStackTrace();
-            }
-        }
+//        ShortMessage myMsg = new ShortMessage();
+//        for(int i = 0; i < 100; i++) {
+//            if (receiver != null) {
+//                try {
+//                    myMsg.setMessage(ShortMessage.NOTE_ON, 0, i, 93);
+//                    receiver.send(myMsg, -1);
+//                } catch (InvalidMidiDataException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            try{
+//                Thread.sleep(200);
+//                try {
+//                    myMsg.setMessage(ShortMessage.NOTE_OFF, 0, i, 93);
+//                    receiver.send(myMsg, -1);
+//                }catch (InvalidMidiDataException e){
+//                    e.printStackTrace();
+//                }
+//            }
+//            catch (InterruptedException e){
+//                e.printStackTrace();
+//            }
+//        }
             /*
             ShortMessage myMsg = new ShortMessage();
   // Start playing the note Middle C (60),
