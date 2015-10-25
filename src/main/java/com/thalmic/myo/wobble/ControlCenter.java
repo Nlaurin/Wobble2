@@ -23,7 +23,6 @@ public class ControlCenter extends JPanel {
         g2.fillRect(0,0,windowWidth,windowHeight);
         g2.setColor(Color.black);
         g2.drawLine(windowWidth/2,0,windowWidth/2,windowHeight);
-        int centerOfPitchX = (windowWidth/5) + 30;
         g2.setStroke(new BasicStroke(10));
         for(int i = 0; i < 8; i++) {
             if(synth.isPlaying()){

@@ -24,7 +24,7 @@ public class Start {
         fr.add(control);
         fr.pack();
         fr.setVisible(true);
-        synth.setInstrument(1);
+        synth.setInstrument(75); //Set instrument
         try {
             Hub hub = new Hub("com.wobble.ctrlcntr");
             hub.setLockingPolicy(LockingPolicy.LOCKING_POLICY_NONE);
