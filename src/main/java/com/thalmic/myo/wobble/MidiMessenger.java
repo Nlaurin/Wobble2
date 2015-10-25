@@ -35,21 +35,6 @@ public class MidiMessenger {
         return message;
     }
 
-    //public Synthesizer playNote(int length){
-    //    isPlaying = true;
-    //    try{
-    //        MidiChannel[] channels = music.getChannels();
-    //        channels[10].programChange(instrument);
-    //        channels[10].noteOn(pitch, volume);
-    //        delay(length);
-    //        channels[10].noteOff(pitch, volume);
-    //        return music;
-    //    }
-    //    catch (Exception e) {
-    //        e.printStackTrace();
-    //        return null;
-    //    }
-    //}
 
     public ShortMessage sendNoteOff(){
         isPlaying = false;

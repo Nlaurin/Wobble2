@@ -9,7 +9,6 @@ import java.awt.*;
  * Created by wongk8 on 10/24/2015.
  */
 public class ControlCenter extends JPanel {
-    //private messenger messenger;
     private MidiMessenger messenger;
     private int windowWidth, windowHeight;
     private final char[] notes = {'C', 'D', 'E', 'F', 'G', 'A', 'B', 'C'};
@@ -32,7 +31,6 @@ public class ControlCenter extends JPanel {
                     g2.fillRect(0, (7-i)*windowHeight/8,windowWidth, windowHeight/8);
                     g2.setColor(Color.black);
                     g2.drawRect(0, (7-i)*windowHeight/8,windowWidth, windowHeight/8);
-                    //g2.drawString("" + notes[messenger.getNotesIndex()], centerOfPitchX, (windowHeight / 9 + 100 * (7 - messenger.getNotesIndex())));
                 }
                 else {
                     g2.setColor(new Color(219, 215, 210));
@@ -40,7 +38,6 @@ public class ControlCenter extends JPanel {
                     g2.fillRect(0, (7-i)*windowHeight/8,windowWidth, windowHeight/8);
                     g2.setColor(Color.black);
                     g2.drawRect(0, (7-i)*windowHeight/8,windowWidth, windowHeight/8);
-                    //g2.drawString("" + notes[i], centerOfPitchX, (windowHeight / 9 + 100 * (7 - i)));
                 }
             }
             else {
@@ -49,7 +46,6 @@ public class ControlCenter extends JPanel {
                     g2.fillRect(0, (7-i)*windowHeight/8,windowWidth, windowHeight/8);
                     g2.setColor(Color.black);
                     g2.drawRect(0, (7-i)*windowHeight/8,windowWidth, windowHeight/8);
-                    //g2.drawString("" + notes[messenger.getNotesIndex()], centerOfPitchX, (windowHeight / 8) * (7 - messenger.getNotesIndex()) + windowHeight/14);
                 }
                 else {
                     g2.setColor(new Color(219, 215, 210));
@@ -65,13 +61,7 @@ public class ControlCenter extends JPanel {
             g2.drawString("Pitch", windowWidth/2 - 25,windowHeight/20);
             g2.drawString("Octave: "+messenger.getOctave(),  windowWidth/2 - 45, windowHeight-30);
         }
-        //if(messenger.isPlaying()) {
-        //    g2.setColor(Color.green);
-        //}
-        //else{
-        //    g2.setColor(Color.blue);
-        //    g2.drawString("" + notes[messenger.getNotesIndex()], centerOfPitchX, (windowHeight / 9 + 100 * messenger.getNotesIndex()));
-        //}
+
     }
 }
 
