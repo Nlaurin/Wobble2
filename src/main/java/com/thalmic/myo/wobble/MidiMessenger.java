@@ -8,9 +8,8 @@ import javax.sound.midi.*;
 public class MidiMessenger {
     final int OCTAVE_MAX = 1;
     final int OCTAVE_MIN = -1;
-    private int pitch, volume, octave, instrument, notesIndex;
+    private int pitch, volume, octave, notesIndex;
     private ShortMessage message;
-    private final int notesSize = 8;
     private boolean isPlaying;
     private final int[] notes;
 
@@ -87,13 +86,17 @@ public class MidiMessenger {
     }
 
     public void increaseOctave() {
-        if(octave < OCTAVE_MAX)
+        if(octave < OCTAVE_MAX) {
             octave++;
+            try{Thread.sleep(400);}catch(InterruptedException e){}
+        }
     }
 
     public void decreaseOctave() {
-        if(octave > OCTAVE_MIN)
+        if(octave > OCTAVE_MIN) {
             octave--;
+            try{Thread.sleep(400);} catch(InterruptedException e){}
+        }
     }
 
     public void resetOctave() {
