@@ -9,10 +9,7 @@ import com.thalmic.myo.Pose;
 import com.thalmic.myo.enums.LockingPolicy;
 import com.thalmic.myo.enums.PoseType;
 
-import javax.sound.midi.MidiDevice;
-import javax.sound.midi.MidiSystem;
-import javax.sound.midi.MidiUnavailableException;
-import javax.sound.midi.Receiver;
+import javax.sound.midi.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -55,7 +52,39 @@ public class Start {
                 e.printStackTrace();
             }
         }
-        
+
+        ShortMessage myMsg = new ShortMessage();
+        for(int i = 0; i < 100; i++) {
+            if (receiver != null) {
+                try {
+                    myMsg.setMessage(ShortMessage.NOTE_ON, 0, i, 93);
+                    receiver.send(myMsg, -1);
+                } catch (InvalidMidiDataException e) {
+                    e.printStackTrace();
+                }
+            }
+            try{
+                Thread.sleep(200);
+                try {
+                    myMsg.setMessage(ShortMessage.NOTE_OFF, 0, i, 93);
+                    receiver.send(myMsg, -1);
+                }catch (InvalidMidiDataException e){
+                    e.printStackTrace();
+                }
+            }
+            catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        }
+            /*
+            ShortMessage myMsg = new ShortMessage();
+  // Start playing the note Middle C (60),
+  // moderately loud (velocity = 93).
+  myMsg.setMessage(ShortMessage.NOTE_ON, 0, 60, 93);
+  long timeStamp = -1;
+  Receiver       rcvr = MidiSystem.getReceiver();
+  rcvr.send(myMsg, timeStamp);
+             */
 
         Synth synth = new Synth();
         ControlCenter control = new ControlCenter(synth);
