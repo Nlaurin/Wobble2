@@ -62,6 +62,7 @@ public class ControlCenter extends JPanel {
             g2.drawString("" + notes[i], 20, (windowHeight / 8) * (7-i) + windowHeight/14);
             g2.setFont(new Font("default", Font.BOLD, 32));
             g2.drawString("Pitch", windowWidth/5 + 30,windowHeight/20);
+            g2.drawString("Octave: "+messenger.getOctave(), 1200, 400);
         }
         //if(messenger.isPlaying()) {
         //    g2.setColor(Color.green);

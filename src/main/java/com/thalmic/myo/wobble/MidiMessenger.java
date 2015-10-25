@@ -119,5 +119,8 @@ public class MidiMessenger {
     public void setNotesIndex(int newIndex){
         notesIndex = newIndex;
     }
+    public int getOctave(){
+        return octave;
+    }
 }
 
