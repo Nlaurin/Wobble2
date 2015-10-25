@@ -9,18 +9,59 @@ import com.thalmic.myo.Pose;
 import com.thalmic.myo.enums.LockingPolicy;
 import com.thalmic.myo.enums.PoseType;
 
+import javax.sound.midi.MidiDevice;
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.MidiUnavailableException;
+import javax.sound.midi.Receiver;
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+
 /**
  * Created by wongk8 on 10/24/2015.
  */
 public class Start {
+    private static MidiDevice dev;
+    private static Receiver receiver;
     public static void main(String[] args){
+        MidiDevice.Info[] infos = MidiSystem.getMidiDeviceInfo();
+        //ArrayList<MidiDevice> device = new ArrayList<>();
+        //ArrayList<String> deviceDetails = new ArrayList<>();
+        for(int i = 0; i < infos.length; i++){
+            if(infos[i].getName().equals("HackUMass")){
+                try {
+                    dev = MidiSystem.getMidiDevice(infos[i]);
+                }
+                catch(MidiUnavailableException e){
+                    e.printStackTrace();
+                }
+            }
+                //MidiDevice dev = MidiSystem.getMidiDevice(infos[i]);
+
+            //deviceDetails.add("Device ID: " + i);
+            //deviceDetails.set(i, deviceDetails.get(i) + "\nName: " + infos[i].getName());
+            //deviceDetails.set(i, deviceDetails.get(i) + "\nDescription: " + infos[i].getDescription());
+//
+            ////device.add(dev);
+            //deviceDetails.set(i, deviceDetails.get(i) + "\nDevice: " + device);
+            //System.out.println(deviceDetails.get(i));
+        }
+        if(!dev.equals(null)){
+            try {
+                dev.open();
+                receiver = dev.getReceiver();
+            }
+            catch (MidiUnavailableException e){
+                e.printStackTrace();
+            }
+        }
+        
+
         Synth synth = new Synth();
         ControlCenter control = new ControlCenter(synth);
         JFrame fr = new JFrame();
         fr.setExtendedState(Frame.MAXIMIZED_BOTH);
-        fr.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE);
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fr.add(control);
         fr.pack();
         fr.setVisible(true);
@@ -47,7 +88,7 @@ public class Start {
             synth.startContinuous();
             Boolean exit = false;
             while (!exit) {
-                hub.run(100);
+                hub.run(50);
                 pose = dataCollector.getCurrentPose();
                 updatePitch = (int)dataCollector.getPitchW();
                 synth.setNotesIndex(updatePitch);

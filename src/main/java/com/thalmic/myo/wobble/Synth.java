@@ -135,6 +135,9 @@ public class Synth {
     public void setNotesIndex(int newIndex){
         notesIndex = newIndex;
     }
+    public Synthesizer getSynthesizer(){
+        return music;
+    }
 }
 
 
