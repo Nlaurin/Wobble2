@@ -6,7 +6,8 @@ import javax.sound.midi.*;
  * Created by nicklaurin + alexkarle + kenzowong on 10/24/15.
  */
 public class MidiMessenger {
-
+    final int OCTAVE_MAX = 1;
+    final int OCTAVE_MIN = -1;
     private int pitch, volume, octave, instrument, notesIndex;
     private ShortMessage message;
     private final int notesSize = 8;
@@ -86,11 +87,13 @@ public class MidiMessenger {
     }
 
     public void increaseOctave() {
-        octave++;
+        if(octave < OCTAVE_MAX)
+            octave++;
     }
 
     public void decreaseOctave() {
-        octave--;
+        if(octave > OCTAVE_MIN)
+            octave--;
     }
 
     public void resetOctave() {

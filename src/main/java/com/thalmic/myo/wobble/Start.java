@@ -124,6 +124,12 @@ public class Start {
                 updatePitch = (int)dataCollector.getPitchW();
                 //synth.setNotesIndex(updatePitch);
                 messenger.setNotesIndex(updatePitch);
+                if(pose.getType() == PoseType.WAVE_OUT) {
+                    messenger.increaseOctave();
+                }
+                if(pose.getType() == PoseType.WAVE_IN) {
+                    messenger.decreaseOctave();
+                }
                 if(pose.getType() == PoseType.FIST) { //only call change of note if we changed pitch
                     //System.out.println(dataCollector.getCurrentPose());
                     lastPitch = pitch;
