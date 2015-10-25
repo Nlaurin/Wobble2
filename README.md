@@ -1,9 +1,10 @@
-myo-java
-========
+Team Schwifty Presents
+------------------------
 
-Java Bindings for Myo
----------------------
+The Wobble
+==========
+HackUMass III Submission
 
-Java language bindings for the Myo Developer Kit. The JNI libraries are all enclosed for OSX and Windows. 
+Myo MIDI mappings for more music. 
 
-If you need to build the Libraries yourself, please refer to this project: https://github.com/NicholasAStuart/myo-java-JNI-Library
+Original Myo to java code provided by: https://github.com/NicholasAStuart/myo-java
